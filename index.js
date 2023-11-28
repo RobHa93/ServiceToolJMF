@@ -1,3 +1,4 @@
+//Server erstellen
 import http from "http";
 
 const port = 3000;
@@ -12,24 +13,18 @@ server.listen(port, host, () => {
   console.log(`Server is running at ${host}:${port}`);
 });
 
-app.use(express.json());
+//Hauptfunktionen abrufen
 
-app.get("/routes/maschinen_typ", (req, res) => {
-  // Logik zum Speichern des Maschinen-Typs implementieren
-  res.send("Maschinen-Typ");
-});
+const express = require("express");
+const app = express();
 
-app.get("/routes/tags", (req, res) => {
-  // Logik zum Speichern der Tags implementieren
-  res.send("Tags");
-});
+const bilderRoutes = require("./routes/bilder.js");
+const maschinenTypRoutes = require("./routes/maschinen_typ.js");
+const notizenRoutes = require("./routes/notizen.js");
+const tagsRoutes = require("./routes/tags.js");
 
-app.get("/routes/notizen", (req, res) => {
-  // Logik zum Speichern der Notizen implementieren
-  res.send("Notizen");
-});
-
-app.post("/routes/bilder", (req, res) => {
-  // Logik zum Speichern der Bilde implementieren
-  res.send("Bild hochgeladen");
-});
+// Funktion aus "routes" verwenden
+app.use("/bilder", bilderRoutes);
+app.use("/maschinen_typ", maschinenTypRoutes);
+app.use("/notizen", notizenRoutes);
+app.use("/tags", tagsRoutes);
